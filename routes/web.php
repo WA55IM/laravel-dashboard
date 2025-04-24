@@ -5,7 +5,9 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\DashboardController;
-
+Route::get('/',function(){
+  return view('welcome');
+});
 Route::get('/dashboard', [DashboardController::class, 'index'])
     
     ->name('dashboard');
