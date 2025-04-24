@@ -1,25 +1,57 @@
 @section('title', __('Dashboard'))
 <x-layouts.app :title="__('Dashboard')">
-    <div class="row g-4">
-        <div class="col-lg-4">
-          <div class="overflow-hidden rounded border" style="aspect-ratio: 16/6;">
-            <x-placeholder-pattern class="h-100 w-100" style="stroke: color-mix(in oklab, oklch(.21 .034 264.665) 20%, transparent);" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <div class="container mt-4">
+    <div class="mb-4">
+      <h2>Welcome, {{ $user->name }}!</h2>
+      
+  </div>
+    <div class="row">
+        <!-- Component 1: Total Users -->
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+              <div class="card-body d-flex flex-column justify-content-between">
+                  <!-- Add the stretched-link anchor -->
+                  <a href="{{ route('users.index') }}" class="stretched-link text-decoration-none"></a>
+                  
+                  <div class="d-flex align-items-center">
+                      <i class="fas fa-users text-primary me-2"></i>
+                      <span class="fs-5">Total Utilisateurs</span>
+                  </div>
+                  <h1 class="fs-3 fw-bold">{{$totalUsers}}</h1>
+              </div>
           </div>
+      </div>
+
+        <!-- Component 2: Total Bank Accounts -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-university text-primary me-2"></i>
+                        <span class="fs-5">Total Comptes Bancaires</span>
+                    </div>
+                    <h1 class="fs-3 fw-bold"></h1>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4">
-          <div class="overflow-hidden rounded border" style="aspect-ratio: 16/6;">
-            <x-placeholder-pattern class="h-100 w-100" style="stroke: color-mix(in oklab, oklch(.21 .034 264.665) 20%, transparent);" />
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="overflow-hidden rounded border" style="aspect-ratio: 16/6;">
-            <x-placeholder-pattern class="h-100 w-100" style="stroke: color-mix(in oklab, oklch(.21 .034 264.665) 20%, transparent);" />
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="overflow-hidden rounded border" style="aspect-ratio: 16/6;">
-            <x-placeholder-pattern class="h-100 w-100" style="stroke: color-mix(in oklab, oklch(.21 .034 264.665) 20%, transparent);" />
-          </div>
+
+        <!-- Component 3: Total Uploaded Files -->
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-upload text-primary me-2"></i>
+                        <span class="fs-5">Total Fichiers Uploadés</span>
+                    </div>
+                    <h1 class="fs-3 fw-bold"></h1>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </x-layouts.app>
+
+

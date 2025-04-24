@@ -46,6 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
 
     /**
      * Get the user's initials
