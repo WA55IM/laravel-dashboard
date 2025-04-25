@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password','type_user',
     ];
 
     /**
@@ -50,6 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Client::class);
     }
+    public function comptes()
+    {
+        return $this->hasMany(Compte::class);
+    }
+    public function fournisseur()
+{
+    return $this->hasMany(Fournisseur::class);
+}
 
     /**
      * Get the user's initials

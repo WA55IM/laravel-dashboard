@@ -5,7 +5,7 @@
       <div class="w-100 d-flex justify-content-center">
         <div>
           <!-- Logo -->
-          <a href="{{url('/')}}" class="app-brand auth-cover-brand gap-2"><x-app-logo /></a>
+          
           <!-- /Logo -->
           <img src="{{asset('assets/img/illustrations/boy-with-rocket-light.png')}}" class="img-fluid" alt="Login image" width="700"/>
         </div>

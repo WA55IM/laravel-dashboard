@@ -33,6 +33,19 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
+                                <label for="type_user" class="form-label">
+                                    {{ __('User Type') }} <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select @error('type_user') is-invalid @enderror" 
+                                    id="type_user" name="type_user" required>
+                                    <option value="client">{{ __('Client') }}</option>
+                                    <option value="fournisseur">{{ __('Fournisseur') }}</option>
+                                </select>
+                                @error('type_user')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label for="email" class="form-label">
                                     {{ __('email') }} <span class="text-danger">*</span>
                                 </label>
@@ -69,12 +82,12 @@
                                     {{ __('Type Client') }} <span class="text-danger">*</span>
                                 </label>
                                 <select class="form-select @error('type_client') is-invalid @enderror" 
-                                id="typeClient" name="type_client">
+                                id="type" name="type">
                                     <option value="étatique">{{ __('Étatique') }}</option>
                                     <option value="privée">{{ __('Privée') }}</option>
                                     <option value="étranger">{{ __('Étranger') }}</option>
                                 </select>
-                                @error('type_client')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                                @error('type')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
 
                             <!-- Num Siret (Conditional) -->
@@ -143,15 +156,8 @@
                                 @error('telephone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
 
-                            <!-- Email -->
-                            <div class="mb-3">
-                                <label for="email" class="form-label">
-                                    {{ __('Email') }} <span class="text-danger">*</span>
-                                </label>
-                                <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                    id="email" name="email" value="{{ old('email') }}" required>
-                                @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
-                            </div>
+                            
+                           
 
                             <!-- Blockage -->
                             <div class="mb-3">
@@ -235,14 +241,14 @@
 </script>
 <script>
     // Client type change handler
-    document.getElementById('typeClient').addEventListener('change', function() {
+    document.getElementById('type').addEventListener('change', function() {
         const siretContainer = document.getElementById('siretContainer');
         siretContainer.style.display = this.value === 'étranger' ? 'block' : 'none';
     });
 
     // Initial check on page load
     window.addEventListener('DOMContentLoaded', () => {
-        const typeSelect = document.getElementById('typeClient');
+        const typeSelect = document.getElementById('type');
         const siretContainer = document.getElementById('siretContainer');
         siretContainer.style.display = typeSelect.value === 'étranger' ? 'block' : 'none';
     });

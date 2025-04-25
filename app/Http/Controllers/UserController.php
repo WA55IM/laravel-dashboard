@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\Fournisseur;
 
 
 use Illuminate\Http\Request;
@@ -25,10 +26,11 @@ class UserController extends Controller
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:8',
+        'type_user' => 'required|in:client,fournisseur',
         'code' => 'required|string|max:255',
         'raison_sociale' => 'required|string|max:255',
-        'type_client' => 'required|in:étatique,privée,étranger',
-        'num_siret' => 'nullable|string|max:255|required_if:type_client,étranger',
+        'type' => 'required|in:étatique,privée,étranger',
+        'num_siret' => 'nullable|string|max:255|required_if:type,étranger',
         'adresse' => 'required|string|max:255',
         'matricule_fiscale' => 'required|string|max:255',
         'code_postal' => 'required|string|max:10',
@@ -41,18 +43,19 @@ class UserController extends Controller
         'date_fin' => 'nullable|date|required_if:exomee,1|after:date_debut',
     ]);
 
-    // Create the User
+    // Create the User 'password' => bcrypt($validated['password']),
     $user = User::create([
         'name' => $validated['name'],
         'email' => $validated['email'],
-        'password' => bcrypt($validated['password']),
+       'password' => bcrypt($validated['password']),
+        'type_user' => $validated['type_user'], // Only update if a new password is provided
     ]);
 
-    // Create the Client
+    if ($validated['type_user'] === 'client') {
     $client = new Client([
         'code' => $validated['code'],
         'raison_sociale' => $validated['raison_sociale'],
-        'type_client' => $validated['type_client'],
+        'type' => $validated['type'],
         'num_siret' => $validated['num_siret'] ?? null,
         'adresse' => $validated['adresse'],
         'matricule_fiscale' => $validated['matricule_fiscale'],
@@ -65,9 +68,24 @@ class UserController extends Controller
         'date_debut' => $validated['date_debut'] ?? null,
         'date_fin' => $validated['date_fin'] ?? null,
     ]);
+    $user->client()->save($client);
+}else {
+    $fournisseur=new Fournisseur([
+        'code' => $validated['code'],
+        'raison_sociale' => $validated['raison_sociale'],
+        'type' => $validated['type'],
+        'adresse' => $validated['adresse'],
+        'blockage' => $validated['blockage'],
+        'code_postal' => $validated['code_postal'],
+    'activite' => $validated['activite'],
+    'telephone' => $validated['telephone'],
+    ]);
+    $user->fournisseur()->save($fournisseur);
+}
+
 
     // Associate the Client with the User
-    $user->client()->save($client);
+    
 
     return redirect()->route('users.index')->with('success', 'User and Client created successfully.');
 }
@@ -80,12 +98,13 @@ class UserController extends Controller
     // Validate the request
     $validated = $request->validate([
         'name' => 'required|string|max:255',
+        'type_user' => 'required|in:client,fournisseur',
         'email' => 'required|string|email|max:255|unique:users,email,' . $id,
         'password' => 'nullable|string|min:8', // Optional if not changing password
         'code' => 'required|string|max:255',
         'raison_sociale' => 'required|string|max:255',
-        'type_client' => 'required|in:étatique,privée,étranger',
-        'num_siret' => 'nullable|string|max:255|required_if:type_client,étranger',
+        'type' => 'required|in:étatique,privée,étranger',
+        'num_siret' => 'nullable|string|max:255|required_if:type,étranger',
         'adresse' => 'required|string|max:255',
         'matricule_fiscale' => 'required|string|max:255',
         'code_postal' => 'required|string|max:10',
@@ -105,14 +124,15 @@ class UserController extends Controller
     $user->update([
         'name' => $validated['name'],
         'email' => $validated['email'],
-        'password' => $validated['password'] ? bcrypt($validated['password']) : $user->password, // Only update if a new password is provided
+        'password' => $validated['password'] ? bcrypt($validated['password']) : $user->password,
+        'type_user' => $validated['type_user'], // Only update if a new password is provided
     ]);
 
-    // Update the related client details
+    if ($validated['type_user'] === 'client') {
     $user->client()->update([
         'code' => $validated['code'],
         'raison_sociale' => $validated['raison_sociale'],
-        'type_client' => $validated['type_client'],
+        'type' => $validated['type'],
         'num_siret' => $validated['num_siret'] ?? null,
         'adresse' => $validated['adresse'],
         'matricule_fiscale' => $validated['matricule_fiscale'],
@@ -125,6 +145,18 @@ class UserController extends Controller
         'date_debut' => $validated['date_debut'] ?? null,
         'date_fin' => $validated['date_fin'] ?? null,
     ]);
+    }else {
+        $user->fournisseur()->update([
+            'code' => $validated['code'],
+            'raison_sociale' => $validated['raison_sociale'],
+            'type' => $validated['type'],
+            'adresse' => $validated['adresse'],
+            'blockage' => $validated['blockage'],
+            'code_postal' => $validated['code_postal'],
+        'activite' => $validated['activite'],
+        'telephone' => $validated['telephone'],
+        ]);
+    }
 
     return redirect()->route('users.index')->with('success', 'User updated successfully.');
 }

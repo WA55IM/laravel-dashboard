@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompteController;
+
 
 use App\Http\Controllers\DashboardController;
 Route::get('/',function(){
@@ -19,5 +21,7 @@ Route::middleware(['auth'])->group(function () {
   Volt::route('settings/password', 'settings.password')->name('settings.password');
 });
 Route::resource('users', UserController::class)->middleware('auth');
+Route::resource('comptes', CompteController::class)->middleware('auth');
+
 
 require __DIR__ . '/auth.php';

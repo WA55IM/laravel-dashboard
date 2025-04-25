@@ -82,7 +82,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 @endsection
 
 <div>
-    <x-auth-header :title="__('Welcome to :app!', ['app' => config('app.name')])" :description="__('Enter your email and password below to log in')" />
+    <x-auth-header :title="__('Welcome to Docufi!', ['app' => config('app.name')])" :description="__('Enter your email and password below to log in')" />
 
     <!-- Session Status -->
     @if (session('status'))
