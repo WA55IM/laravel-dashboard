@@ -1,5 +1,6 @@
 @section('title', __('Dashboard'))
 <x-layouts.app :title="__('Dashboard')">
+    
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-4">
         <h1>Users</h1>

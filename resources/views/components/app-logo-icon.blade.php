@@ -1,1 +1,1 @@
-<img src="{{ asset('assets/img/logicom photo.jpg') }}" alt="Logo" class="app-logo" style="width: 50px; height: 50px;">
+<img src="{{ asset('assets/img/doc.png') }}" alt="Logo" class="app-logo" style="width: 80px; height: 80px;">

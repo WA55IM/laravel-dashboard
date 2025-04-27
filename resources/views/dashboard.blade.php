@@ -87,7 +87,13 @@
             </div>
         </div>
     </div>
+    <footer class="text-center">
+        <div class="container py-3">
+          <p>© {{ date('Y') }} Logicom Informatique. All rights reserved.</p>
+        </div>
+      </footer>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');

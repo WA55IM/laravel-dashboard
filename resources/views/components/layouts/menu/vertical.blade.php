@@ -15,7 +15,7 @@
     <!-- Settings -->
     <li class="menu-item {{ request()->is('settings/*') ? 'active open' : '' }}">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-cog"></i>
+        <i class="menu-icon tf-icons bx bx-cog text-primary"></i>
         <div class="text-truncate">{{ __('Settings') }}</div>
       </a>
       <ul class="menu-sub">
@@ -27,8 +27,41 @@
         </li>
       </ul>
     </li>
+
+    <!-- Users -->
+    <li class="menu-item">
+      <a class="menu-link" href="{{ route('users.index') }}">
+        <i class="fas fa-users text-primary me-2"></i>
+        <span>{{ __('Users') }}</span>
+      </a>
+    </li>
+
+    <!-- Comptes -->
+    <li class="menu-item">
+      <a class="menu-link" href="{{ route('comptes.index') }}">
+        <i class="fas fa-university text-primary me-2"></i>
+        <span>{{ __('Comptes') }}</span>
+      </a>
+    </li>
+
+    <!-- Fournisseurs -->
+    <li class="menu-item">
+      <a class="menu-link" href=""> <!-- Update route if needed -->
+        <i class="fas fa-truck text-primary me-2"></i>
+        <span>{{ __('Fournisseurs') }}</span>
+      </a>
+    </li>
+
+    <!-- Documents -->
+    <li class="menu-item">
+      <a class="menu-link" href=""> <!-- Update route if needed -->
+        <i class="fas fa-file-upload text-primary me-2"></i>
+        <span>{{ __('Documents') }}</span>
+      </a>
+    </li>
   </ul>
 </aside>
+
 <!-- / Menu -->
 
 <script>
@@ -41,3 +74,7 @@
     });
   });
 </script>
+<style>/* Remove underline from menu links */
+  #layout-menu .menu-link {
+    text-decoration: none; /* Removes underline */
+  }</style>
