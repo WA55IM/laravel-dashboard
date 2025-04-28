@@ -44,4 +44,9 @@
     @include('partials.scripts')
     <!-- / Include Scripts -->
   </body>
+  <footer class="text-center">
+    <div class="container py-3">
+      <p>© {{ date('Y') }} Logicom Informatique. All rights reserved.</p>
+    </div>
+  </footer>
 </html>

@@ -72,8 +72,8 @@ class CompteController extends Controller
      */
     public function edit(Compte $compte)
     {
-        $clients = User::where('type', 'client')->get();
-        $fournisseurs = User::where('type', 'fournisseur')->get();
+        $clients = User::where('type_user', 'client')->get();
+        $fournisseurs = User::where('type_user', 'fournisseur')->get();
 
         return view('comptes.edit', compact('compte', 'clients', 'fournisseurs'));
     }

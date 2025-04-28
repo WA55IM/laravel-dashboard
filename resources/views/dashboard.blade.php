@@ -29,6 +29,7 @@
       <div class="col-md-4 mb-4">
         <div class="card h-100">
             <div class="card-body d-flex flex-column justify-content-between">
+                <a href="{{ route('clients.index') }}" class="stretched-link text-decoration-none"></a>
                 <div class="d-flex align-items-center">
                     <i class="fas fa-users text-primary me-2"></i>
                     <span class="fs-5">Total Clients</span>
@@ -47,7 +48,7 @@
                         <i class="fas fa-university text-primary me-2"></i>
                         <span class="fs-5">Total Comptes Bancaires</span>
                     </div>
-                    <h1 class="fs-3 fw-bold"></h1>
+                    <h1 class="fs-3 fw-bold">{{$totalComptes}}</h1>
                 </div>
             </div>
         </div>
@@ -87,11 +88,7 @@
             </div>
         </div>
     </div>
-    <footer class="text-center">
-        <div class="container py-3">
-          <p>© {{ date('Y') }} Logicom Informatique. All rights reserved.</p>
-        </div>
-      </footer>
+    
 </div>
 
 <script>

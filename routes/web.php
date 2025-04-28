@@ -22,6 +22,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::resource('users', UserController::class)->middleware('auth');
 Route::resource('comptes', CompteController::class)->middleware('auth');
+Route::get('/clients', [DashboardController::class, 'client'])->name('clients.index');
 
 
 require __DIR__ . '/auth.php';

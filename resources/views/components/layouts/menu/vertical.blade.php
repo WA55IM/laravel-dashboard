@@ -43,6 +43,12 @@
         <span>{{ __('Comptes') }}</span>
       </a>
     </li>
+    <li class="menu-item">
+      <a class="menu-link" href="{{ route('clients.index') }}">
+        <i class="fas fa-users text-primary me-2"></i>
+        <span>{{ __('Clients') }}</span>
+      </a>
+    </li>
 
     <!-- Fournisseurs -->
     <li class="menu-item">
