@@ -60,7 +60,7 @@
 
     <!-- Documents -->
     <li class="menu-item">
-      <a class="menu-link" href=""> <!-- Update route if needed -->
+      <a class="menu-link" href="{{ route('documents') }}"> 
         <i class="fas fa-file-upload text-primary me-2"></i>
         <span>{{ __('Documents') }}</span>
       </a>
