@@ -36,7 +36,7 @@
                                 
                                 @if(isset(session('result')['fields']))
                                     <div class="mt-2">
-                                        <h6>Extracted Fields:</h6>
+                                        <h6><strong>Extracted Fields:</strong></h6>
                                         <ul class="list-unstyled">
                                             @foreach(session('result')['fields'] as $field => $data)
                                                 <li class="mb-1">
@@ -84,7 +84,7 @@
                     </div>
                     
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="submitBtn">
                             <i class="fas fa-cloud-upload-alt me-2"></i> Process Document
                         </button>
                     </div>
