@@ -18,13 +18,14 @@ class FileUploadController extends Controller
 
     public function showDocumentsPage()
     {
-        return view('documents');
+        $documents = Document::orderBy('created_at', 'desc')->get();
+        return view('documents', compact('documents'));
     }
 
     public function processUpload(Request $request)
     {
         $request->validate([
-            'document' => 'required|file|mimes:jpg,jpeg,png,pdf|max:10240', // 10MB max
+            'document' => 'required|file|mimes:pdf,jpeg,png|max:10240', // 10MB max
         ]);
 
         try {
@@ -38,16 +39,18 @@ class FileUploadController extends Controller
             $document->type = $result['classification']['class'] ?? 'Unknown';
             $document->confidence = $result['classification']['confidence'] ?? 0;
             $document->fields = $result['fields'] ?? null;
-            $document->path = $file->store('public/uploads'); // Saves to storage/app/public/uploads
+            $document->path = $file->store('public/uploads');
             $document->save();
 
-            return back()
+            return redirect()
+                ->back()
                 ->with('success', 'Document processed successfully!')
                 ->with('result', $result);
 
         } catch (\Exception $e) {
-            Log::error('Document processing failed: ' . $e->getMessage());
-            return back()
+            Log::error('Processing failed: ' . $e->getMessage());
+            return redirect()
+                ->back()
                 ->with('error', 'Processing failed: ' . $e->getMessage());
         }
     }
