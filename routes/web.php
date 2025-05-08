@@ -26,10 +26,15 @@ Route::resource('comptes', CompteController::class)->middleware('auth');
 Route::get('/clients', [DashboardController::class, 'client'])->name('clients.index');
 
 
-Route::get('/documents', [FileUploadController::class, 'showDocumentsPage'])
-     ->name('documents');
-Route::post('/documents/process-upload', [FileUploadController::class, 'processUpload'])
-     ->name('documents.process-upload'); 
+Route::prefix('documents')->name('documents.')->group(function() {
+  // Document list page (GET)
+  Route::get('/', [FileUploadController::class, 'showDocumentsPage'])
+      ->name('index'); // Name is now 'documents.index'
+
+  // Processing endpoint (POST)
+  Route::post('/process-upload', [FileUploadController::class, 'processUpload'])
+      ->name('process-upload'); // Name remains 'documents.process-upload'
+});
 
 
 require __DIR__ . '/auth.php';
